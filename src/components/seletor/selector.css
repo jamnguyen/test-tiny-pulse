@@ -1,0 +1,82 @@
+:root {
+  --duration: .1s;
+  --padding: 10px 16px;
+}
+
+.selector-container {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  position: relative;
+  transition: border-color var(--duration) linear;
+  width: 400px;
+}
+.selector-container:hover {
+  border-color: lightskyblue;
+}
+
+.selector-container .selector-result {
+  cursor: pointer;
+  font-weight: 500;
+  padding: var(--padding);
+  padding-right: 30px;
+}
+
+.selector-container .selector-options {
+  border-top: 1px solid lightgray;
+  padding: var(--padding);
+  padding-top: 16px;
+}
+
+.selector-container .selector-options input {
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  font-size: 13px;
+  padding: 8px 10px;
+  transition: border-color var(--duration) linear;
+  width: 100%;
+}
+.selector-container .selector-options input:focus {
+  outline: none;
+}
+
+.selector-container .selector-options ul {
+  margin-top: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.selector-container .selector-options li {
+  cursor: pointer;
+  font-size: 14px;
+  list-style: none;
+  padding: 6px 0;
+  transition: background-color var(--duration) linear;
+}
+.selector-container .selector-options li.highlighted {
+  font-weight: 500;
+}
+.selector-container .selector-options li:hover {
+  background-color: #eee;
+}
+
+.selector-container .selector-loader {
+  animation: spin 1s linear infinite;
+  border: 2px solid lightskyblue;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: block;
+  height: 16px;
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  width: 16px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

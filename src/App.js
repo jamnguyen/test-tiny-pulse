@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Selector } from './components/seletor';
+
+const API_SEARCH = 'https://hn.algolia.com/api/v1/search';
 
 function App() {
+
+  const [ story, setStory ] = React.useState();
+
+  const search = async (keyword = '') => {
+    try {
+      const response = await fetch(API_SEARCH + '?' + new URLSearchParams({ query: keyword }));
+      const result = await response.json();
+      return result.hits.map(item => ({
+        ...item,
+        id: item.objectID,
+        text: item.title || item.story_text
+      }));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Selector
+        value={ story }
+        onChange={ setStory }
+        search={ search }
+      />
     </div>
   );
 }
